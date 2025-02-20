@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .hamburger-line {
+        @apply w-[30px] h-[2px] my-2 block bg-bgPrimary;
+    }
+
+    .arrow-story {
+        @apply before:inline-block before:absolute before:border-t-transparent before:border-t-[14px] before:border-l-[#ccc] before:border-l-[15px] before:border-r-[#ccc] before:border-r-0 before:border-b-transparent before:border-b-[15px] before:top-16 before:-right-4 after:absolute after:inline-block after:border-t-transparent after:border-t-[14px] after:border-l-white after:border-l-[14px] after:border-r-white after:border-r-0 after:border-b-transparent after:border-b-[14px] after:top-[65px] after:-right-[14px]
+    }
+
+    .arrow-story-inverted {
+        @apply before:inline-block before:absolute before:border-t-transparent before:border-t-[14px] before:border-l-[#ccc] before:border-l-[15px] before:border-r-[#ccc] before:border-r-0 before:border-b-transparent before:border-b-[15px] before:top-16 before:-right-4 after:absolute after:inline-block after:border-t-transparent after:border-t-[14px] after:border-l-white after:border-l-[14px] after:border-r-white after:border-r-0 after:border-b-transparent after:border-b-[14px] after:top-[63px] after:-right-[14px]
+    }
+
+    .arrow-story-inverted-lg {
+        @apply before:inline-block before:absolute before:border-t-transparent before:border-t-0 before:border-l-[#ccc] before:border-l-0 before:border-r-[#ccc] before:border-r-0 before:border-b-transparent before:border-b-0 before:top-16 before:-right-4 after:absolute after:inline-block after:border-t-transparent after:border-t-0 after:border-l-white after:border-l-0 after:border-r-white after:border-r-0 after:border-b-transparent after:border-b-0 after:top-[63px] after:-right-0
+    }
+
+    .scrollbarStyle {
+        @apply scrollbar-thin scrollbar-thumb-pinkPrimary/60 scrollbar-track-pinkPrimary/20 scrollbar-thumb-rounded-full hover:scrollbar-thumb-pinkPrimary/80 transition
+    }
+}
+
+@layer utilities {
+    .hamburger-active > span:nth-child(1) {
+        @apply rotate-45;
+    }
+    .hamburger-active > span:nth-child(2) {
+        @apply scale-0;
+    }
+    .hamburger-active > span:nth-child(3) {
+        @apply -rotate-45;
+    }
+}
