@@ -57,9 +57,12 @@ class UndanganResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nama')->label('Nama'),
+                TextColumn::make('nama')->label('Nama')->searchable(),
                 TextColumn::make('pronoun')->label('Sapaan'),
-                TextColumn::make('slug')->label('Slug'),
+                TextColumn::make('slug')->label('Slug')
+                    ->formatStateUsing(fn($state) => url('/undangan/' . $state))
+                    ->copyable(fn($state) => url('/undangan/' . $state))
+                    ->openUrlInNewTab(),
             ])
 
             ->filters([

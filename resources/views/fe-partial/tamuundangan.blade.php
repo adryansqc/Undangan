@@ -46,6 +46,12 @@
         </div>
     </section>
     <!-- End Hero -->
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
 
     <!-- Start Navbar -->
     <div class="navbar bg-white/30 backdrop-blur-sm sticky top-0 lg:px-[5%] xl:px-[10%] py-4 z-50">
@@ -259,6 +265,9 @@
         </div>
     </section>
 
+
+
+
     <!-- End Gallery -->
 
     <!-- Start RSVP -->
@@ -268,7 +277,8 @@
             <p class="text-sm sm:text-base md:text-lg text-white">Isi form di bawah ini untuk melakukan konfirmasi kehadiran.</p>
         </div>
 
-        <form action="https://script.google.com/macros/s/AKfycbzdfZFy3ER6ZLPcLYVSFTC0rDAL_YUxkXpjuOaiAOBYQoDB1OljLc3CYUeuKpuK9tjE/exec" method="post" id="my-form" class="flex flex-col sm:flex-row justify-center items-center gap-x-3 px-5">
+        <form action="{{ route('kehadiran.store') }}" method="post" id="my-form" class="flex flex-col sm:flex-row justify-center items-center gap-x-3 px-5">
+            @csrf
             <div class="form-control w-full max-w-xs">
                 <label class="label" for="nama">
                     <span class="label-text text-lg text-white">Nama</span>
@@ -279,7 +289,7 @@
                 <label class="label" for="jumlah">
                     <span class="label-text text-lg text-white">Jumlah</span>
                 </label>
-                <input type="number" min="1" max="5" length="1" value="1" name="jumlah" id="jumlah" class="input input-bordered w-full max-w-xs sm:w-24 sm:max-w-none text-black" required />
+                <input type="number" min="1" max="5" value="1" name="jumlah" id="jumlah" class="input input-bordered w-full max-w-xs sm:w-24 sm:max-w-none text-black" required />
             </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label" for="status">
@@ -298,6 +308,7 @@
                 <button type="submit" class="btn bg-pinkPrimary text-white border-pinkPrimary hover:text-pinkPrimary hover:bg-white hover:border-white">Kirim</button>
             </div>
         </form>
+
     </section>
     <!-- End RSVP -->
 
@@ -320,14 +331,14 @@
                             <th class="font-normal text-xl">{{ $configs['keterangan bank'] ?? 'Keterangan bank' }}</th>
                         </tr>
 
-                        <tr class="border-b-0">
+                        {{-- <tr class="border-b-0">
                             <th class="font-bold text-xl">Saweria</th>
-                        </tr>
-                        <tr>
+                        </tr> --}}
+                        {{-- <tr>
                             <th class="flex justify-center">
                                 <img src="{{ asset('/') }}assets/src/img/saweria.png" alt="donasi saweria" class="w-[200px]">
                             </th>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
@@ -345,7 +356,7 @@
             <a href="#rsvp" class="link link-hover">RSVP</a>
             <a href="#gifts" class="link link-hover">Gifts</a>
         </nav>
-        
+
         <aside>
             <p>2025 © All Rights Reserverd. Build with <span class="text-black">❤</span> by <a href="#" target="_blank" class="link link-hover font-semibold">Kami Wedding Organizer</a></p>
         </aside>

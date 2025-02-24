@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('/undangan', [UndanganController::class, 'index'])->name('undangan.index');
 Route::get('/undangan/{slug}', [UndanganController::class, 'show'])->name('undangan.show');
+Route::post('/undangan/store', [UndanganController::class, 'store'])->name('kehadiran.store');
