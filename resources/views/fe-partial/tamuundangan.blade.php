@@ -5,8 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan</title>
+    <title>Undangan Pernikahan {{ $configs['panggilan laki'] ?? 'Nama Laki-laki' }} & {{ $configs['panggilan perempuan'] ?? 'Nama perempuan' }}</title>
 
+    <meta property="og:title" content="Undangan Pernikahan {{ $configs['panggilan laki'] ?? 'Nama Laki-laki' }} & {{ $configs['panggilan perempuan'] ?? 'Nama perempuan' }}">
+    <meta property="og:description" content="Kami mengundang Anda untuk hadir dalam acara pernikahan kami.">
+    {{-- <meta property="og:image" content="{{ asset('storage/thumbnail.jpg') }}"> --}}
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
     <link rel="shortcut icon" href="{{ asset('/') }}assets/src/img/primary-background.jpg" type="image/x-icon">
 
     <!-- Google Font -->
@@ -34,7 +39,10 @@
 
 <body class="font-workSans scrollbarStyle">
     <!-- Start Hero -->
-    <section id="hero" class="w-full h-full min-h-screen p-3 mx-auto text-center flex justify-center items-center {{ $configs['warna teks'] ?? 'text-pinkPrimary' }} bg-center bg-auto" style="background-image: url('{{ asset('/') }}assets/src/img/primary-background.jpg'); color: {{ $configs['warna teks'] ?? '#E91E63' }};">
+    <section id="hero" class="w-full h-full min-h-screen p-3 mx-auto text-center flex justify-center items-center {{ $configs['warna teks'] ?? 'text-pinkPrimary' }} bg-center bg-no-repeat"
+    style="background-image: url('{{ isset($configs['bgcover']) && $configs['bgcover'] ? asset('storage/' . $configs['bgcover']) : asset('/') . 'assets/src/img/primary-background.jpg' }}');
+           color: {{ $configs['warna teks'] ?? '#E91E63' }};
+           background-size: cover;">
         <div>
             <h4 class="text-lg sm:text-xl lg:text-3xl drop-shadow-md animate__animated animate__fadeInLeft">
                 Kepada <span>{{ $undangan->pronoun ?? 'Bapak/Ibu/Saudara/i' }} {{ $undangan->nama ?? '' }},</span>

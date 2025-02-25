@@ -17,6 +17,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -75,25 +76,31 @@ class UndanganResource extends Resource
                     ->importer(UndanganImporter::class)
             ])
             ->actions([
-                Action::make('Bagikan')
-                    ->label('Bagikan')
-                    ->icon('heroicon-o-link')
-                    ->url(fn($record) => 'https://wa.me/?text=' . urlencode('Undangan untuk Anda: ' . url('/undangan/' . $record->slug)))
-                    ->openUrlInNewTab(),
-
+                Tables\Actions\EditAction::make(),
                 Action::make('Copy Link')
-                    ->label('Copy Link')
+                    ->label('Copy')
                     ->icon('heroicon-o-clipboard')
                     ->modalHeading('Salin Link Undangan')
                     ->modalDescription('Tekan dan tahan untuk menyalin link berikut:')
                     ->modalContent(fn($record) => new HtmlString('<input type="text" value="' . url('/undangan/' . $record->slug) . '" readonly class="w-full p-2 border rounded">'))
                     ->modalSubmitActionLabel('Tutup'),
-
-                Tables\Actions\EditAction::make(),
-            ])
+                Action::make('Bagikan')
+                    ->label('Bagikan')
+                    ->icon('heroicon-o-link')
+                    ->url(fn($record) => 'https://wa.me/?text=' . urlencode($record->getUndanganMessage(config('undangan'))))
+                    ->openUrlInNewTab(),
+            ], position: ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('Bagikan')
+                        ->label('Bagikan via WhatsApp')
+                        ->icon('heroicon-o-share')
+                        ->action(function ($records) {
+                            $links = $records->map(fn($record) => url('/undangan/' . $record->slug))->implode("\n");
+                            $whatsappUrl = 'https://wa.me/?text=' . urlencode("Undangan untuk Anda:\n" . $links);
+                            return redirect()->away($whatsappUrl);
+                        }),
                 ]),
             ]);
     }

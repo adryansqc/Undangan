@@ -50,7 +50,7 @@ class ConfigResource extends Resource
 
                 FileUpload::make('value')
                     ->label('Upload File')
-                    ->required()
+                    // ->required()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])
                     ->hidden(fn($get) => $get('type') !== 'file')
                     ->disk('public')
