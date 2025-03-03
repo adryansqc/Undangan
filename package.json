@@ -13,5 +13,11 @@
         "postcss": "^8.4.47",
         "tailwindcss": "^3.4.13",
         "vite": "^6.0.11"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/svelte": "^2.0.3",
+        "@sveltejs/vite-plugin-svelte": "^5.0.3",
+        "svelte": "^5.20.4"
     }
 }
